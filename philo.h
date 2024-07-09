@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:14:58 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/09 11:10:52 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/09 11:23:36 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,36 @@
 #include <unistd.h>
 #include <limit.h>
 
-typedef	struct	s_philo
+typedef	pthread_mutex_t	t_mtx;
+
+typedef struct s_fork
+{
+	t_mtx	fork;
+	int		fork_id;
+}			t_fork;
+
+struct	s_philo
 {
 	unsigned int	id;
-	
-	pthread_mutex_t	left_fork;
-	pthread_mutex_t	right_fork;
+	long			meals_eat;
+	long			last_meal_time;
+	bool			full;
+	t_fork			*left_fork;
+	t_fork			*right_fork;
+	pthread_t		thread_id;
 	struct s_data	*data;
 }				t_philo;
 
 typedef	struct	s_data
 {
-	unsigned int	nbr_philo;
-	unsigned int	time_to_die;
-	unsigned int	time_to_eat;
-	unsigned int	time_to_sleep;
-	unsigned int	nbr_eat;
-	long long		start_time;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	*print_lock;
-	t_philo		*philo;
+	long	nbr_philo;
+	long	time_to_die;
+	long	time_to_eat;
+	long	time_to_sleep;
+	long	nbr_eat;
+	long	start_time;
+	bool	end_simulation;
+	t_fork	*forks;
+	t_philo	*philo;
 }				t_data;
 
