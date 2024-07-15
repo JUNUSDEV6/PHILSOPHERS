@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:14:58 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/15 13:35:31 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:12:58 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,23 @@ typedef enum e_opcode
 	DETACH,
 }			t_opcode;
 
+typedef enum e_time_code
+{
+	SECONDS,
+	MILISECONDS,
+	MICROSECONDS,
+}			t_time_code;
+
+typedef enum e_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DIED,
+}			t_status_philo;
+
 typedef	pthread_mutex_t	t_mtx;
 
 typedef struct s_fork
@@ -75,6 +92,7 @@ struct	s_data
 	bool	end_simulation;
 	bool	all_threads_ready;
 	t_mtx	table_mutex;
+	t_mtx	write_mutex;
 	t_fork	*forks;
 	t_philo	*philo;
 };

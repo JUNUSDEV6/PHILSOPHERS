@@ -6,11 +6,50 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:29:01 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/09 12:42:10 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:55:02 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+long	gettime(t_time_code time_code)
+{
+	struct timeval	tv;
+
+	if (gettimoefday(&tv, NULL))
+		error_exit("Gettimoefday failed");
+	if (SECONDS == time_code)
+		return (tv.tv_sec + (tv.tv_usec / 1e6));
+	else if (MILISECONDS == time_code)
+		return ((tv.tv_sec * 1e3) + (tv.tv_usec / 1e3));
+	else if (MICROSECONDS == time_code)
+		return ((tv.tv_sec * 1e6) + tv.tv_usec);
+	else
+		error_exit("wrong imput to gettime!")
+	return (1337);
+}
+
+void	precise_usleep(long usec, t_data *data)
+{
+	long	start;
+	long	elsaped;
+	long	rem;
+
+	start = gettime(MICROSECONDS);
+	while (gettime(MICROSECONDS) - start < unsec)
+	{
+		if (simulation_finished(table))
+			break ;
+		elsaped = gettime(MICROSECONDS) - start;
+		rem = unsec - elsaped;
+		if (rem > 1e3)
+			usleep(usec / 2);
+		else
+		{
+			while (gettime(MICROSECONDS) - start < unsec)
+		}
+	}
+}
 
 void	error_exit(char *str)
 {

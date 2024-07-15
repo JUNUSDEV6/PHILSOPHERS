@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:18:13 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/15 13:35:03 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:57:38 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	set_bool(t_mtx *mutex, bool *dest, bool value)
 	*dest = value;
 	safe_mutex_handle(mutex, UNLOCK);
 }
-bool	get_bool(t_mtx *mutex, bool *value)
+bool	 get_bool(t_mtx *mutex, bool *value)
 {
 	bool	ret;
 
