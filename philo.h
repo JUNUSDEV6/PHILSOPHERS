@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:14:58 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/09 17:51:35 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/15 13:35:31 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ struct	s_data
 	long	nbr_eat;
 	long	start_time;
 	bool	end_simulation;
+	bool	all_threads_ready;
+	t_mtx	table_mutex;
 	t_fork	*forks;
 	t_philo	*philo;
 };
@@ -83,6 +85,12 @@ void	safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
 void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *), 
 		void *data, t_opcode opcode);
 
+//setters_getters
+void	set_bool(t_mtx *mutex, bool *dest, bool value);
+bool	get_bool(t_mtx *mutex, bool *value);
+void	get_long(t_mtx *mutex, long *value);
+void	set_long(t_mtx *mutex, bool *dest, long value);
+bool	simulation_finished(t_data *data);
 //utils
 void	error_exit(char *str);
 long	ft_atol(const char *str);
