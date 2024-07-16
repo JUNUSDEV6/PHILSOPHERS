@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:29:01 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/15 16:55:02 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:32:25 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ long	gettime(t_time_code time_code)
 {
 	struct timeval	tv;
 
-	if (gettimoefday(&tv, NULL))
+	if (gettimeofday(&tv, NULL))
 		error_exit("Gettimoefday failed");
 	if (SECONDS == time_code)
 		return (tv.tv_sec + (tv.tv_usec / 1e6));
@@ -25,7 +25,7 @@ long	gettime(t_time_code time_code)
 	else if (MICROSECONDS == time_code)
 		return ((tv.tv_sec * 1e6) + tv.tv_usec);
 	else
-		error_exit("wrong imput to gettime!")
+		error_exit("wrong imput to gettime!");
 	return (1337);
 }
 
@@ -36,17 +36,18 @@ void	precise_usleep(long usec, t_data *data)
 	long	rem;
 
 	start = gettime(MICROSECONDS);
-	while (gettime(MICROSECONDS) - start < unsec)
+	while (gettime(MICROSECONDS) - start < usec)
 	{
-		if (simulation_finished(table))
+		if (simulation_finished(data))
 			break ;
 		elsaped = gettime(MICROSECONDS) - start;
-		rem = unsec - elsaped;
+		rem = usec - elsaped;
 		if (rem > 1e3)
 			usleep(usec / 2);
 		else
 		{
-			while (gettime(MICROSECONDS) - start < unsec)
+			while (gettime(MICROSECONDS) - start < usec)
+				;
 		}
 	}
 }

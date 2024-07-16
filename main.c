@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 12:06:55 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/15 17:08:33 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:33:42 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void philo_init(t_data *data)
 		philo->full = false;
 		philo->meals_eat = 0;
 		philo->data = data;
+		safe_mutex_handle(&philo->philo_mutex, INIT);
 		assign_forks(philo, data->forks, i);
 	}
 }
@@ -67,8 +68,8 @@ static void	data_init(t_data *data)
 	data->end_simulation = false;
 	data->all_threads_ready = false;
 	data->philo = safe_malloc(sizeof(t_philo) * data->nbr_philo);
-	safe_mutex_handle(data->table_mutex, INIT);
-	safe_mutex_handle(data->write_mutex, INIT);
+	safe_mutex_handle(&data->table_mutex, INIT);
+	safe_mutex_handle(&data->write_mutex, INIT);
 	data->forks = safe_malloc(sizeof(t_fork) * data->nbr_philo);
 	while (++i < data->nbr_philo)
 	{

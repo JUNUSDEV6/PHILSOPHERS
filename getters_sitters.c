@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 13:18:13 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/15 14:57:38 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:39:13 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ bool	 get_bool(t_mtx *mutex, bool *value)
 	return (ret);
 }
 
-void	get_long(t_mtx *mutex, long *value)
+long	get_long(t_mtx *mutex, long *value)
 {
 	long	ret;
 
-	safe_mutex_handle(mutex, LOCK)
+	safe_mutex_handle(mutex, LOCK);
 	ret = *value;
 	safe_mutex_handle(mutex, UNLOCK);
 	return (ret);
 }
 
-void	set_long(t_mtx *mutex, bool *dest, long value)
+void	set_long(t_mtx *mutex, long *dest, long value)
 {
 	safe_mutex_handle(mutex, LOCK);
 	*dest = value;

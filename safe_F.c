@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:08:58 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/09 17:50:48 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:29:31 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void handle_mutex_error(int status, t_opcode opcode)
 		error_exit("A deadlock would occur if the thread blocked waiting for mutex");
 	else if (EPERM == status)
 		error_exit("The current thread does not hold a lock on mutex");
-	else if (ENONEM == status)
+	else if (ENOMEM == status)
 		error_exit("The process cannot allocate enough memory to create another mutex");
 	else if (EBUSY == status)
 		error_exit("Mutex is locked");
