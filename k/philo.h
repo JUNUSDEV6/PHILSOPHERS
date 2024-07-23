@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:29:29 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/23 11:30:08 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/23 12:25:13 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,37 @@
 #define BOLD_WHITE   "\033[1;37m"
 #define RST        "\033[0m"
 
+typedef struct s_philo
+{
+	int				id;
+	long			last_eat;
+	int				nbr_eat;
+	int				left_fork;
+	int				right_fork;
+	int				verif;
+	pthread_t		thread;
+	struct s_data	*data;
+}			t_philo;
+
+typedef struct s_data
+{
+	int				nb_philo;
+	unsigned int	t_to_die;
+	unsigned int	t_to_eat;
+	unsigned int	t_to_sleep;
+	int				nb_of_time;
+	int				dead;
+	atomic_int		eat_en;
+	int				all_eat;
+	time_t			start_time;
+	t_philo			*philo;
+	pthread_mutex_t	m_print;
+	pthread_mutex_t	m_dead;
+	pthread_mutex_t	m_full;
+	pthread_mutex_t	*fork;
+}			t_data;
+
+////----- UTILS ------////
+void		error_exit(char *str);
+long long	ft_atol(char *av);
+int			check_value(char **argv);
