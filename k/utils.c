@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:30:32 by yohanafi          #+#    #+#             */
-/*   Updated: 2024/07/23 12:18:17 by yohanafi         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:07:31 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ long long	ft_atol(char *av)
 	return (nbr);
 }
 
-
 int	check_value(char **argv)
 {
 	int	i;
@@ -68,7 +67,16 @@ int	check_value(char **argv)
 	if (is_digit(argv))
 		return (1);
 	while (argv[++i])
-		if (argv[i] > INT_MAX || !ft_atol(argv[i]))
+		if (ft_atol(argv[i]) > INT_MAX || !ft_atol(argv[i])
+			|| ft_atol(argv[i]) < 0)
 			return (1);
 	return (0);
+}
+
+time_t	get_time(t_data *data)
+{
+	static struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (((time.tv_sec * 1000) + (time.tv_usec / 1000)) - data->start_time);
 }
