@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:48:59 by yohanafi          #+#    #+#             */
-/*   Updated: 2026/01/08 17:28:25 by yohanafi         ###   ########.fr       */
+/*   Updated: 2026/01/08 18:07:48 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 static int	parsing(t_data *data, char **argv)
 {
+	data->simulation_f = false;
+	data->threads_ready = false;
+	data->table_mtx_flag = false;
+	data->write_mtx_flag = false;
+	data->philo = NULL;
+	data->forks = NULL;
 	data->nbr_philo = ft_atol(argv[1]);
 	if (data->nbr_philo > 500)
 	{
@@ -29,10 +35,6 @@ static int	parsing(t_data *data, char **argv)
 	data->nbr_meal = -1;
 	if (argv[5])
 		data->nbr_meal = ft_atol(argv[5]);
-	data->simulation_f = false;
-	data->threads_ready = false;
-	data->table_mtx_flag = false;
-	data->write_mtx_flag = false;
 	return (0);
 }
 
