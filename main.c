@@ -6,7 +6,7 @@
 /*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:48:59 by yohanafi          #+#    #+#             */
-/*   Updated: 2026/01/08 16:00:43 by yohanafi         ###   ########.fr       */
+/*   Updated: 2026/01/08 17:28:25 by yohanafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 static int	parsing(t_data *data, char **argv)
 {
 	data->nbr_philo = ft_atol(argv[1]);
+	if (data->nbr_philo > 500)
+	{
+		printf("max 500 philos");
+		return (-1);
+	}
 	data->t_t_die = ft_atol(argv[2]) * 1000;
 	data->t_t_eat = ft_atol(argv[3]) * 1000;
 	data->t_t_sleep = ft_atol(argv[4]) * 1000;
