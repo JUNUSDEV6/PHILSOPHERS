@@ -64,6 +64,8 @@ struct s_data
 };
 
 /* Utility functions */
+void        smart_sleep(long duration, t_data *data);
+void	    philo_id(unsigned int id);
 void	    *philo_routine(void *arg);
 void        print_state(t_philo *philo, char *msg);
 void        free_data(t_data *data, int i);

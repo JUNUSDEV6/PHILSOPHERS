@@ -36,7 +36,7 @@ static void	philo_eat(t_philo *philo)
 	philo->last_meal = get_time_us();
 	pthread_mutex_unlock(&philo->philo_mutex);
 	print_state(philo, "is eating");
-	usleep(philo->data->t_t_eat);
+	smart_sleep(philo->data->t_t_eat, philo->data);
 	pthread_mutex_lock(&philo->philo_mutex);
 	philo->nbr_meal_eat++;
 	if (philo->data->nbr_meal != -1 && philo->nbr_meal_eat
@@ -54,7 +54,7 @@ static void	drop_forks(t_philo *philo)
 static void	philo_sleep(t_philo *philo)
 {
 	print_state(philo, "is sleeping");
-	usleep(philo->data->t_t_sleep);
+	smart_sleep(philo->data->t_t_sleep, philo->data);
 }
 
 void	*philo_routine(void *arg)
@@ -74,6 +74,7 @@ void	*philo_routine(void *arg)
 		pthread_mutex_unlock(&philo->first_fork->fork);
 		return (NULL);
 	}
+	philo_id(philo->id);
 	while (!data->simulation_f && !philo->full)
 	{
 		take_forks(philo);
