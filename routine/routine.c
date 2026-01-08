@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 16:09:01 by yohanafi          #+#    #+#             */
+/*   Updated: 2026/01/08 16:11:24 by yohanafi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philopher.h"
 
-void	take_forks(t_philo *philo)
+static void	take_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
@@ -18,7 +30,7 @@ void	take_forks(t_philo *philo)
 	}
 }
 
-void	philo_eat(t_philo *philo)
+static void	philo_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->philo_mutex);
 	philo->last_meal = get_time_us();
@@ -27,27 +39,22 @@ void	philo_eat(t_philo *philo)
 	usleep(philo->data->t_t_eat);
 	pthread_mutex_lock(&philo->philo_mutex);
 	philo->nbr_meal_eat++;
-	if (philo->data->nbr_meal != -1 && philo->nbr_meal_eat >= 
-			philo->data->nbr_meal)
+	if (philo->data->nbr_meal != -1 && philo->nbr_meal_eat
+		>= philo->data->nbr_meal)
 		philo->full = true;
 	pthread_mutex_unlock(&philo->philo_mutex);
 }
 
-void	drop_forks(t_philo *philo)
+static void	drop_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(&philo->first_fork->fork);
 	pthread_mutex_unlock(&philo->second_fork->fork);
 }
 
-void	philo_sleep(t_philo *philo)
+static void	philo_sleep(t_philo *philo)
 {
 	print_state(philo, "is sleeping");
 	usleep(philo->data->t_t_sleep);
-}
-
-void	philo_think(t_philo *philo)
-{
-	print_state(philo, "is thinking");
 }
 
 void	*philo_routine(void *arg)
@@ -55,7 +62,7 @@ void	*philo_routine(void *arg)
 	t_philo	*philo;
 	t_data	*data;
 
-	philo = (t_philo*)arg;
+	philo = (t_philo *) arg;
 	data = philo->data;
 	while (!data->threads_ready)
 		usleep(100);

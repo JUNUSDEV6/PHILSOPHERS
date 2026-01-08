@@ -7,7 +7,6 @@ CFLAGS += -I./include
 # Source files
 SRCS = main.c \
        utils/utils.c \
-       utils/error.c \
        routine/routine.c
 
 # Object files

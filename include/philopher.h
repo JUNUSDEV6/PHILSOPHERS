@@ -1,5 +1,17 @@
-#ifndef PHILOSPHER_H
-#define PHILOSPHER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philopher.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yohanafi <yohanafi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/08 16:11:47 by yohanafi          #+#    #+#             */
+/*   Updated: 2026/01/08 16:12:33 by yohanafi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PHILOPHER_H
+# define PHILOPHER_H
 
 # include <pthread.h>
 # include <sys/time.h>
@@ -53,10 +65,10 @@ struct s_data
 
 /* Utility functions */
 void	    *philo_routine(void *arg);
-long        get_time_us(void);
 void        print_state(t_philo *philo, char *msg);
 void        free_data(t_data *data, int i);
-void        error(t_data *data, int code);
+void		philo_think(t_philo *philo);
+long        get_time_us(void);
 long long	ft_atol(char *av);
 
 #endif
