@@ -90,4 +90,6 @@ void	free_data(t_data *data, int i)
 void	philo_think(t_philo *philo)
 {
 	print_state(philo, "is thinking");
+	usleep(500);
+
 }

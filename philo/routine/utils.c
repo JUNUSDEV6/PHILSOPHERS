@@ -27,6 +27,6 @@ void	smart_sleep(long duration, t_data *data)
 
 void	philo_id(unsigned int id)
 {
-	if (id % 2 == 0)
+	if (id % 2)
 		usleep(1000);
 }

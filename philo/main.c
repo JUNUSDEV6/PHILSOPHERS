@@ -21,9 +21,9 @@ static int	parsing(t_data *data, char **argv)
 	data->philo = NULL;
 	data->forks = NULL;
 	data->nbr_philo = ft_atol(argv[1]);
-	if (data->nbr_philo > 500)
+	if (data->nbr_philo > 200)
 	{
-		printf("max 500 philos");
+		printf("max 200 philos");
 		return (-1);
 	}
 	data->t_t_die = ft_atol(argv[2]) * 1000;
@@ -84,34 +84,6 @@ static void	init_philo(t_data *data)
 	}
 }
 
-static void	monitor_philos(t_data *data, int i, long now)
-{
-	while (!data->simulation_f)
-	{
-		i = -1;
-		while (++i < data->nbr_philo)
-		{
-			pthread_mutex_lock(&data->philo[i].philo_mutex);
-			now = get_time_us();
-			if (now - data->philo[i].last_meal > data->t_t_die)
-			{
-				pthread_mutex_unlock(&data->philo[i].philo_mutex);
-				pthread_mutex_lock(&data->write_mtx);
-				if (!data->simulation_f)
-				{
-					data->simulation_f = true;
-					printf("%ld %d died\n", (now - data->time_start) / 1000,
-						data->philo[i].id);
-				}
-				pthread_mutex_unlock(&data->write_mtx);
-				return ;
-			}
-			pthread_mutex_unlock(&data->philo[i].philo_mutex);
-		}
-		usleep(1000);
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -133,7 +105,7 @@ int	main(int argc, char **argv)
 		pthread_create(&data->philo[i].thread_id, NULL, philo_routine,
 			&data->philo[i]);
 	data->threads_ready = true;
-	monitor_philos(data, -1, 0);
+	monitor_philos(data, -1, 0, 0);
 	i = -1;
 	while (++i < data->nbr_philo)
 		pthread_join(data->philo[i].thread_id, NULL);

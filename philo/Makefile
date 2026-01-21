@@ -6,6 +6,7 @@ CFLAGS += -I./include
 
 # Source files
 SRCS = main.c \
+	   utils_main.c \
        utils/utils.c \
 	   routine/utils.c \
        routine/routine.c
